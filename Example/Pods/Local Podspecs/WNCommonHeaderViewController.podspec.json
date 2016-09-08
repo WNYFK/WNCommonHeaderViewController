@@ -1,22 +1,23 @@
 {
   "name": "WNCommonHeaderViewController",
-  "version": "0.1.0",
-  "summary": "A short description of WNCommonHeaderViewController.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/WNCommonHeaderViewController",
-  "license": {
-    "type": "MIT",
-    "file": "LICENSE"
-  },
+  "version": "0.0.1",
+  "summary": "common headerview and segment for multiple tableview or scrollview",
+  "description": "该库是对于多个tableview或scrollview或它们的组合包含公共头部，tableview支持分页加载，tableview、scrollview之间可以横滑切换,公共头部滑动松手后tableview或scrollview可以继续以该加速度继续滑动",
+  "homepage": "https://github.com/WNYFK/WNCommonHeaderViewController",
+  "license": "MIT",
   "authors": {
-    "陈斌": "chenbin05@meituan.com"
-  },
-  "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/WNCommonHeaderViewController.git",
-    "tag": "0.1.0"
+    "chenbin": "1344819035.cb@gamil.com"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "5.0"
   },
-  "source_files": "WNCommonHeaderViewController/Classes/**/*"
+  "requires_arc": true,
+  "source": {
+    "git": "https://github.com/WNYFK/WNCommonHeaderViewController.git",
+    "tag": "v0.0.1"
+  },
+  "source_files": [
+    "WNCommonHeaderViewController/Classes",
+    "WNCommonHeaderViewController/Classes/**/*.{h,m}"
+  ]
 }

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '41B5D790D76D87C19C1CA007'
+               BlueprintIdentifier = '716E8B651DB8A8EC114D7EA2'
                BlueprintName = 'WNCommonHeaderViewController'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'WNCommonHeaderViewController.framework'>

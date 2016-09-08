@@ -1,6 +1,0 @@
-#import <UIKit/UIKit.h>
-
-
-FOUNDATION_EXPORT double Pods_WNCommonHeaderViewController_Example_WNCommonHeaderViewController_TestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_WNCommonHeaderViewController_Example_WNCommonHeaderViewController_TestsVersionString[];
-
