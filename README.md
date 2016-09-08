@@ -22,7 +22,7 @@ pod "WNCommonHeaderViewController"
 
 ## Author
 
-陈斌, chenbin05@meituan.com
+蜗牛, 1344819035.cb@gmail.com
 
 ## License
 
