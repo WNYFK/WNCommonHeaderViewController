@@ -38,6 +38,5 @@
 - (void)selectViewControllerWithIndex:(NSUInteger)index;
 
 - (void)addViewsForEnableHorizontalScroll:(NSArray<UIView *> *)views;
-- (void)changeCommonHeaderToHeight:(CGFloat)newHeight;
 
 @end

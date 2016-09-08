@@ -31,12 +31,6 @@
     self.commonSegmentView.backgroundColor = [UIColor greenColor];
     self.viewControllers = @[self.firstTableViewController, self.secondTableViewController];
     self.headerAndSegmentSpace = 15;
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"改高" style:UIBarButtonItemStylePlain target:self action:@selector(changeHeight)];
-}
-
-- (void)changeHeight {
-    [self changeCommonHeaderToHeight:self.commonHeaderView.WN_height + 20];
 }
 
 #pragma mark WNCommonHeaderHandleDelegate

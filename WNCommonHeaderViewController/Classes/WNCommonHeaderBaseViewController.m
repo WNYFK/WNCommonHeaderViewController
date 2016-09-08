@@ -24,6 +24,8 @@
 @end
 
 @implementation WNCommonHeaderBaseViewController
+@synthesize commonHeaderView = _commonHeaderView;
+@synthesize commonSegmentView = _commonSegmentView;
 
 - (void)dealloc {
     [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController<WNCommonHeaderProtocol> * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -37,6 +39,20 @@
         self.curSelectedIndex = -1;
     }
     return self;
+}
+
+- (UIView *)commonHeaderView {
+    if (!_commonHeaderView) {
+        _commonHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _commonHeaderView;
+}
+
+- (UIView *)commonSegmentView {
+    if (!_commonSegmentView) {
+        _commonSegmentView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _commonSegmentView;
 }
 
 - (NSMutableArray<NSNumber *> *)originSubSViewInsetTopValueArr {
@@ -80,7 +96,7 @@
             [self.horizontalScrollView addSubview:vc.view];
             [vc didMoveToParentViewController:self];
             vc.view.frame = CGRectMake(idx * self.horizontalScrollView.WN_width, 0, self.horizontalScrollView.WN_width, self.horizontalScrollView.WN_height);
-            vc.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            vc.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin;
             UIScrollView *ctScrollView = [vc contentScrollView];
             ctScrollView.scrollsToTop = NO;
             ctScrollView.showsVerticalScrollIndicator = NO;
@@ -97,9 +113,9 @@
         [_commonHeaderView removeFromSuperview];
         _commonHeaderView = commonHeaderView != nil ? commonHeaderView : [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.horizontalScrollView.WN_width, 0)];
         [self.commonContentView addSubview:commonHeaderView];
-        [self checkHeaderPosition:YES diffHeight:0];
+        [self checkHeaderPosition];
     } else if (_commonHeaderView.WN_height != commonHeaderView.WN_height) {
-        [self checkHeaderPosition:YES diffHeight:0];
+        [self checkHeaderPosition];
     }
 }
 
@@ -108,29 +124,29 @@
         [_commonSegmentView removeFromSuperview];
         _commonSegmentView = commonSegmentView != nil ? commonSegmentView : [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.horizontalScrollView.WN_width, 0)];
         [self.commonContentView addSubview:commonSegmentView];
-        [self checkHeaderPosition:YES diffHeight:0];
+        [self checkHeaderPosition];
     } else if (_commonSegmentView.WN_height != commonSegmentView.WN_height) {
-        [self checkHeaderPosition:YES diffHeight:0];
+        [self checkHeaderPosition];
     }
 }
 
 - (void)setHeaderAndSegmentSpace:(CGFloat)headerAndSegmentSpace {
     if (_headerAndSegmentSpace != headerAndSegmentSpace) {
         _headerAndSegmentSpace = headerAndSegmentSpace;
-        [self checkHeaderPosition:YES diffHeight:0];
+        [self checkHeaderPosition];
     }
 }
 
-- (void)checkHeaderPosition:(BOOL)needResetContentOffset diffHeight:(CGFloat)diffHeight {
+- (void)checkHeaderPosition {
     self.commonHeaderView.WN_y = 0;
     self.commonSegmentView.WN_y = self.commonHeaderView.WN_bottom + ((self.commonHeaderView.WN_height != 0) ? self.headerAndSegmentSpace : 0);
     if (self.commonContentView.WN_height != self.commonSegmentView.WN_bottom) {
         self.commonContentView.WN_height = self.commonSegmentView.WN_bottom;
-        [self updateSubScrollViewContentInset:needResetContentOffset diffHeight:0];
+        [self updateSubScrollViewContentInset];
     }
 }
 
-- (void)updateSubScrollViewContentInset:(BOOL)needResetContentOffset diffHeight:(CGFloat)diffHeight {
+- (void)updateSubScrollViewContentInset {
     [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController<WNCommonHeaderProtocol> * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIScrollView *ctScrollView = [obj contentScrollView];
         if ([ctScrollView isKindOfClass:[UIScrollView class]]) {
@@ -143,7 +159,7 @@
             }
             UIEdgeInsets contentInset = UIEdgeInsetsMake(top + self.commonContentView.WN_height, ctScrollView.contentInset.left, ctScrollView.contentInset.bottom, ctScrollView.contentInset.right);
             ctScrollView.contentInset = contentInset;
-            ctScrollView.contentOffset = needResetContentOffset ? CGPointMake(0, -ctScrollView.contentInset.top): CGPointMake(ctScrollView.contentOffset.x, ctScrollView.contentOffset.y);
+            ctScrollView.contentOffset = CGPointMake(0, -ctScrollView.contentInset.top);
             if ([obj respondsToSelector:@selector(scrollViewContentInsetChanged:)]) {
                 [obj scrollViewContentInsetChanged:contentInset];
             }
@@ -157,23 +173,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.firstLoad) {
-        [self checkHeaderPosition:YES diffHeight:0];
+        [self checkHeaderPosition];
         [self updateHeaderToCurScrollView:self.curSelectedIndex > 0 ? self.curSelectedIndex : 0];
-        [self updateSubScrollViewContentInset:YES diffHeight:0];
+        [self updateSubScrollViewContentInset];
         self.firstLoad = NO;
     }
-}
-
-- (void)changeCommonHeaderToHeight:(CGFloat)newHeight {
-    if (self.commonHeaderView.WN_height == newHeight) return;
-    CGFloat diffHeight = newHeight - self.commonHeaderView.WN_height;
-    NSMutableArray<NSNumber *> *newContentInsetTopArr = [NSMutableArray array];
-    [self.originSubSViewInsetTopValueArr enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [newContentInsetTopArr addObject:[NSNumber numberWithInteger:obj.integerValue + diffHeight]];
-    }];
-    self.commonHeaderView.WN_height = newHeight;
-    [self checkHeaderPosition:NO diffHeight:diffHeight];
-    
 }
 
 - (void)viewDidLoad {
