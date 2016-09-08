@@ -30,13 +30,14 @@
 
 @property (nonatomic, weak) id<WNCommonHeaderHandleDelegate> delegate;
 @property (nonatomic, copy) NSArray<UIViewController<WNCommonHeaderProtocol> *> *viewControllers;
-@property (nonatomic, strong) UIView *commonHeaderView;
+@property (nonatomic, copy) UIView *commonHeaderView;
 @property (nonatomic, assign) CGFloat headerAndSegmentSpace;
-@property (nonatomic, strong) UIView *commonSegmentView;
+@property (nonatomic, copy) UIView *commonSegmentView;
 @property (nonatomic, assign, readonly) NSInteger curSelectedIndex;
 
 - (void)selectViewControllerWithIndex:(NSUInteger)index;
 
 - (void)addViewsForEnableHorizontalScroll:(NSArray<UIView *> *)views;
+- (void)changeCommonHeaderToHeight:(CGFloat)newHeight;
 
 @end
