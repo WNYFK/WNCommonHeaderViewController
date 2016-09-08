@@ -160,13 +160,9 @@
     if (self.firstLoad) {
         [self checkHeaderPosition];
         [self updateHeaderToCurScrollView:self.curSelectedIndex > 0 ? self.curSelectedIndex : 0];
+        [self updateSubScrollViewContentInset];
         self.firstLoad = NO;
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
 }
 
 - (void)viewDidLoad {
