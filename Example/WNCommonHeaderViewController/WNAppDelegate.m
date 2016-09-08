@@ -7,12 +7,22 @@
 //
 
 #import "WNAppDelegate.h"
+#import "WNHomeListViewController.h"
+
+@interface WNAppDelegate ()
+
+@property (nonatomic, strong) UINavigationController *rootNavigationController;
+
+@end
 
 @implementation WNAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:[[WNHomeListViewController alloc] init]];
+    self.window.rootViewController = self.rootNavigationController;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
