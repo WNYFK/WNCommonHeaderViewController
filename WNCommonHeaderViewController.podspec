@@ -25,6 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
+                    该库是对于多个tableview或scrollview或它们的组合包含公共头部，tableview支持分页加载，tableview、scrollview之间可以横滑切换,公共头部滑动松手后tableview或scrollview可以继续以该加速度继续滑动
                    DESC
 
   s.homepage     = "https://github.com/WNYFK/WNCommonHeaderViewController"
@@ -80,7 +81,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/WNYFK/WNCommonHeaderViewController.git", :commit => "70c14d21fc59b3354a686223a6b7650c2dc6961c" }
+  s.source       = { :git => "https://github.com/WNYFK/WNCommonHeaderViewController.git", :tag => "v0.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -91,8 +92,8 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Classes", "Classes/**/*.{h,m}"
-  s.exclude_files = "Classes/Exclude"
+  s.source_files  = "WNCommonHeaderViewController/Classes", "WNCommonHeaderViewController/Classes/**/*.{h,m}"
+  # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
 
