@@ -1,0 +1,6 @@
+framework module WNCommonHeaderViewController {
+  umbrella header "WNCommonHeaderViewController-umbrella.h"
+
+  export *
+  module * { export * }
+}

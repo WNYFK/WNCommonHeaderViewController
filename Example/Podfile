@@ -4,9 +4,7 @@ target 'WNCommonHeaderViewController_Example' do
   pod 'WNCommonHeaderViewController', :path => '../'
 
   target 'WNCommonHeaderViewController_Tests' do
-    inherit! :search_paths
-
-    pod 'Specta'
+  pod 'Specta'
   pod 'Expecta'
   pod 'FBSnapshotTestCase'
   pod 'Expecta+Snapshots'
